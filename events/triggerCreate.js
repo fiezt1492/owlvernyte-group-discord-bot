@@ -7,6 +7,7 @@
 
 module.exports = {
 	name: "messageCreate",
+	skip: true,
 
 	/**
 	 * @description Executes when a message is created and handle it.

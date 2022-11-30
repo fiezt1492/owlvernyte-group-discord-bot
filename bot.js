@@ -50,6 +50,7 @@ const eventFiles = fs
 // Loop through all files and execute the event when it is actually emmited.
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
+	if (event.skip) continue;
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client));
 	} else {
