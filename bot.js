@@ -16,7 +16,7 @@ const {
 } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id } = require("./config.json");
+const { token, client_id, test_guild_id } = require("./config.js");
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -71,7 +71,7 @@ client.contextCommands = new Collection();
 client.modalCommands = new Collection();
 client.cooldowns = new Collection();
 client.autocompleteInteractions = new Collection();
-client.triggers = new Collection();
+// client.triggers = new Collection();
 
 /**********************************************************************/
 // Registration of Message-Based Legacy Commands.
@@ -136,6 +136,7 @@ for (const module of autocompleteInteractions) {
 		.filter((file) => file.endsWith(".js"));
 
 	for (const interactionFile of files) {
+		if (interactionFile == "sample.js") continue;
 		const interaction = require(`./interactions/autocomplete/${module}/${interactionFile}`);
 		client.autocompleteInteractions.set(interaction.name, interaction);
 	}
@@ -158,6 +159,7 @@ for (const folder of contextMenus) {
 		.readdirSync(`./interactions/context-menus/${folder}`)
 		.filter((file) => file.endsWith(".js"));
 	for (const file of files) {
+		if (file == "sample.js") continue;
 		const menu = require(`./interactions/context-menus/${folder}/${file}`);
 		const keyName = `${folder.toUpperCase()} ${menu.data.name}`;
 		client.contextCommands.set(keyName, menu);
@@ -182,6 +184,7 @@ for (const module of buttonCommands) {
 		.filter((file) => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
+		if (commandFile == "sample.js") continue;
 		const command = require(`./interactions/buttons/${module}/${commandFile}`);
 		client.buttonCommands.set(command.id, command);
 	}
@@ -205,6 +208,7 @@ for (const module of modalCommands) {
 		.filter((file) => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
+		if (commandFile == "sample.js") continue;
 		const command = require(`./interactions/modals/${module}/${commandFile}`);
 		client.modalCommands.set(command.id, command);
 	}
@@ -227,6 +231,7 @@ for (const module of selectMenus) {
 		.readdirSync(`./interactions/select-menus/${module}`)
 		.filter((file) => file.endsWith(".js"));
 	for (const commandFile of commandFiles) {
+		if (commandFile == "sample.js") continue;
 		const command = require(`./interactions/select-menus/${module}/${commandFile}`);
 		client.selectCommands.set(command.id, command);
 	}
@@ -276,24 +281,24 @@ const commandJsonData = [
 /**********************************************************************/
 // Registration of Message Based Chat Triggers
 
-/**
- * @type {String[]}
- * @description All trigger categories aka folders.
- */
+// /**
+//  * @type {String[]}
+//  * @description All trigger categories aka folders.
+//  */
 
-const triggerFolders = fs.readdirSync("./triggers");
+// const triggerFolders = fs.readdirSync("./triggers");
 
-// Loop through all files and store triggers in triggers collection.
+// // Loop through all files and store triggers in triggers collection.
 
-for (const folder of triggerFolders) {
-	const triggerFiles = fs
-		.readdirSync(`./triggers/${folder}`)
-		.filter((file) => file.endsWith(".js"));
-	for (const file of triggerFiles) {
-		const trigger = require(`./triggers/${folder}/${file}`);
-		client.triggers.set(trigger.name, trigger);
-	}
-}
+// for (const folder of triggerFolders) {
+// 	const triggerFiles = fs
+// 		.readdirSync(`./triggers/${folder}`)
+// 		.filter((file) => file.endsWith(".js"));
+// 	for (const file of triggerFiles) {
+// 		const trigger = require(`./triggers/${folder}/${file}`);
+// 		client.triggers.set(trigger.name, trigger);
+// 	}
+// }
 
 // Login into your client application with bot's token.
 
