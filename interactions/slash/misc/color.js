@@ -4,6 +4,9 @@ const changeRoleColor = require("../../../modules/changeRoleColor");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("color")
+        .setDescription(
+            "Color me run"
+        )
         .addSubcommand(sub =>
             sub
                 .setName("me")
