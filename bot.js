@@ -16,8 +16,8 @@ const {
 } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id } = require("./config.js");
-
+const config = require("./config.js");
+const { token, client_id, test_guild_id } = config;
 /**
  * From v13, specifying the intents is compulsory.
  * @type {import('./typings').Client}
@@ -43,7 +43,7 @@ const client = new Client({
 		GatewayIntentBits.DirectMessageReactions,
 		GatewayIntentBits.DirectMessageTyping,
 		GatewayIntentBits.GuildScheduledEvents,
-		GatewayIntentBits.MessageContent
+		GatewayIntentBits.MessageContent,
 	],
 	partials: [Partials.Channel],
 });
@@ -86,6 +86,7 @@ client.modalCommands = new Collection();
 client.cooldowns = new Collection();
 client.autocompleteInteractions = new Collection();
 // client.triggers = new Collection();
+client.config = config;
 
 /**********************************************************************/
 // Registration of Message-Based Legacy Commands.

@@ -1,13 +1,16 @@
 const changeRoleColor = require("../modules/changeRoleColor");
 
 module.exports = {
-    name: "guildMemberUpdate",
+	name: "userUpdate",
 
-    execute(oldMember, newMember, client) {
-        if (oldMember.user.bot || newMember.user.bot) return;
-        if (oldMember.user.avatar == newMember.user.avatar) return;
+	async execute(oldUser, newUser, client) {
+		if (oldUser.bot || newUser.bot) return;
+		if (oldUser.avatar == newUser.avatar) return;
 
-        changeRoleColor(newMember);
+		const testGuild = await client.guilds.fetch(client.config.test_guild_id);
 
-    },
+		const member = await testGuild.members.fetch(newUser);
+
+		changeRoleColor(member);
+	},
 };
