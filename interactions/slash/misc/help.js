@@ -74,7 +74,7 @@ module.exports = {
 
 		// Replies to the interaction!
 
-		await interaction.reply({
+		await interaction.editReply({
 			embeds: [helpEmbed],
 		});
 	},

@@ -16,7 +16,7 @@ module.exports = {
     async execute(interaction) {
         const { member } = interaction;
         changeRoleColor(member).then((member) => {
-            interaction.reply({
+            interaction.editReply({
                 content: "Done!",
             })
         }).catch(console.log)
