@@ -43,6 +43,7 @@
 		"dotenv": "^16.0.3",
 		"download": "^8.0.0",
 		"node-vibrant": "^3.2.1-alpha.1",
-		"temp": "^0.9.4"
+		"temp": "^0.9.4",
+		"undici": "^5.14.0"
 	}
 }
